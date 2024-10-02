@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <router-link to="Add">Add Course</router-link>
+    <br>
+    <router-link to="View">View Courses</router-link>
+    <br>
+    <router-link to="Update">Update Course</router-link>
+    <router-view/>
+
     <h1>University Course Management</h1>
 
     <add-course @addCourse="addCourse" />
@@ -15,6 +22,8 @@
       :course="editingCourse" 
       @updateCourse="updateCourse" 
     />
+
+    
   </div>
 </template>
 
