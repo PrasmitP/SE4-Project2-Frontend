@@ -16,15 +16,19 @@
       </div>
       <div>
         <label for="number">Course Number : </label>
-        <input v-model="course.number" type="text" id="number" required maxlength="4" />
+        <input v-model="course.number" type="text" id="number" required maxlength="9" />
       </div>
       <div>
         <label for="level">Course Level : </label>
-        <input v-model="course.level" type="number" id="level" required min="1" max="4" />
+        <input v-model="course.level" type="number" id="level" required min="1" max="9" />
       </div>
       <div>
         <label for="hours">Credit Hours : </label>
-        <input v-model="course.hours" type="number" id="hours" required min="1" />
+        <input v-model="course.hours" type="number" id="hours" required min="1" max="9" />
+      </div>
+      <div>
+        <label for="description">Description : </label>
+        <input v-model="course.description" type="text" id="description" required/>
       </div>
       <div>
         <button type="submit">Confirm</button>

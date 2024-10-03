@@ -4,24 +4,28 @@
 
     <form @submit.prevent="submitUpdate" class="popup-form">
       <div>
-        <label for="name">Course Name</label>
+        <label for="name">Course Name: </label>
         <input v-model="updatedCourse.name" type="text" id="name" required />
       </div>
       <div>
-        <label for="department">Department (4-letter abbreviation)</label>
+        <label for="department">Department: </label>
         <input v-model="updatedCourse.department" type="text" id="department" required maxlength="4" />
       </div>
       <div>
-        <label for="number">Course Number (4-digit)</label>
+        <label for="number">Course Number: </label>
         <input v-model="updatedCourse.number" type="text" id="number" required maxlength="4" />
       </div>
       <div>
-        <label for="level">Course Level (Year)</label>
-        <input v-model="updatedCourse.level" type="number" id="level" required min="1" max="4" />
+        <label for="level">Course Level: </label>
+        <input v-model="updatedCourse.level" type="number" id="level" required min="1" max="9" />
       </div>
       <div>
-        <label for="hours">Credit Hours</label>
-        <input v-model="updatedCourse.hours" type="number" id="hours" required min="1" />
+        <label for="hours">Credit Hours: </label>
+        <input v-model="updatedCourse.hours" type="number" id="hours" required min="1" max="9" />
+      </div>
+      <div>
+        <label for="description">Description: </label>
+        <input v-model="updatedCourse.description" type="text" id="description" required/>
       </div>
       <div>
         <button type="submit">Confirm</button>
