@@ -5,10 +5,11 @@
       <thead>
         <tr>
           <th>Course Name</th>
-          <th>Course Department</th>
+          <th>Department</th>
           <th>Course Number</th>
           <th>Level</th>
           <th>Hours</th>
+          <th>Description</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -19,6 +20,7 @@
           <td>{{ course.number }}</td>
           <td>{{ course.level }}</td>
           <td>{{ course.hours }}</td>
+          <td>{{ course.description }}</td>
           <td>
             <button @click="$emit('editCourse', course)">Edit</button>
             <button @click="$emit('deleteCourse', course.id)">Delete</button>
