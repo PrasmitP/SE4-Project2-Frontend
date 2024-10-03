@@ -13,7 +13,7 @@
       </div>
       <div>
         <label for="number">Course Number: </label>
-        <input v-model="updatedCourse.number" type="text" id="number" required maxlength="4" />
+        <input v-model="updatedCourse.number" type="text" id="number" required maxlength="9" />
       </div>
       <div>
         <label for="level">Course Level: </label>
