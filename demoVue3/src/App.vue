@@ -96,19 +96,15 @@ export default {
 </script>
 
 <style>
-/* Basic styling */
 body {
   font-family: Arial, sans-serif;
 }
 
 #app {
-  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 2rem;
 }
 </style>
