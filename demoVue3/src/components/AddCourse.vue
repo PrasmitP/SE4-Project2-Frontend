@@ -1,36 +1,40 @@
 <template>
-  <div>
-    
-    <!-- Add Course Button -->
-    <button v-if="!showForm" @click="toggleForm">Add Course</button>
-    
-    <!-- Course Form (hidden initially) -->
-    <form v-if="showForm" @submit.prevent="submitCourse">
-      <div>
-        <label for="name">Course Name : </label>
-        <input v-model="course.name" type="text" id="name" required />
-      </div>
-      <div>
-        <label for="department">Department : </label>
-        <input v-model="course.department" type="text" id="department" required maxlength="4" />
-      </div>
-      <div>
-        <label for="number">Course Number : </label>
-        <input v-model="course.number" type="text" id="number" required maxlength="4" />
-      </div>
-      <div>
-        <label for="level">Course Level : </label>
-        <input v-model="course.level" type="number" id="level" required min="1" max="4" />
-      </div>
-      <div>
-        <label for="hours">Credit Hours : </label>
-        <input v-model="course.hours" type="number" id="hours" required min="1" />
-      </div>
-      <div>
-        <button type="submit">Confirm</button>
-        <button type="button" @click="cancelForm">Cancel</button>
-      </div>
-    </form>
+  <!-- Add Course Button -->
+  <button v-if="!showForm" @click="toggleForm">Add Course</button>
+  <div v-if="showForm" class="overlay">
+    <div class="model">
+      <!-- Course Form (hidden initially) -->
+      <form v-if="showForm" @submit.prevent="submitCourse">
+        <div>
+          <label for="name">Course Name: </label>
+          <input class="textInput" v-model="course.name" type="text" id="name" required />
+        </div>
+        <div>
+          <label for="department">Department: </label>
+          <input class="textInput" v-model="course.department" type="text" id="department" required maxlength="4" />
+        </div>
+        <div>
+          <label for="number">Course Number: </label>
+          <input class="textInput" v-model="course.number" type="text" id="number" required maxlength="4" />
+        </div>
+        <div>
+          <label for="level">Course Level: </label>
+          <input class="textInput" v-model="course.level" type="number" id="level" required min="1" max="4" />
+        </div>
+        <div>
+          <label for="hours">Credit Hours: </label>
+          <input class="textInput" v-model="course.hours" type="number" id="hours" required min="1" />
+        </div>
+        <div>
+          <label for="description">Description: </label>
+          <textarea    class="descInput" v-model="course.description" type="text" id="description" />
+        </div>
+        <div>
+          <button type="submit">Confirm</button>
+          <button type="button" @click="cancelForm">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -48,7 +52,8 @@ export default {
       department: '',
       number: '',
       level: 1, // Default to first year
-      hours: 0
+      hours: 0,
+      description: ''
     });
 
     // Toggles the visibility of the form
@@ -87,11 +92,42 @@ export default {
 
 <style scoped>
 form {
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+  width: auto;
 }
 
-button {
-  margin-top: 1rem;
-  margin-right: 0.5rem;
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.model {
+  width: 400px;
+  padding: 20px;
+  margin: 100px auto;
+  background: white;
+  border-radius: 10px;
+  height: auto;
+}
+
+label {
+  display: inline-block;
+  clear: left;
+  width: 125px;
+  text-align: left;
+}
+
+.textInput {
+  display: inline-block;
+}
+
+button{
+  margin-left: 10px;
 }
 </style>
