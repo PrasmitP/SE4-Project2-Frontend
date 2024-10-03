@@ -97,7 +97,6 @@ export default {
 </script>
 
 <style>
-/* Basic styling */
 body {
   font-family: Arial, sans-serif;
 }

@@ -1,5 +1,5 @@
 <template>
-  <!-- Add Course Button -->
+  <!-- AddCourse Button -->
   <button v-if="!showForm" @click="toggleForm">Add Course</button>
   <div v-if="showForm" class="overlay">
     <div class="model">
@@ -27,7 +27,7 @@
         </div>
         <div>
           <label for="description">Description: </label>
-          <textarea    class="descInput" v-model="course.description" type="text" id="description" />
+          <textarea class="descInput" v-model="course.description" type="text" id="description" />
         </div>
         <div>
           <button type="submit">Confirm</button>
@@ -39,53 +39,63 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-
 export default {
-  setup(props, { emit }) {
-    // Track form visibility
-    const showForm = ref(false);
-
-    // Course data model
-    const course = ref({
-      name: '',
-      department: '',
-      number: '',
-      level: 1, // Default to first year
-      hours: 0,
-      description: ''
-    });
-
-    // Toggles the visibility of the form
-    const toggleForm = () => {
-      showForm.value = true;
-    };
-
-    // Handles the form submission
-    const submitCourse = () => {
-      emit('addCourse', { ...course.value });
-      // Reset fields and hide the form after submission
-      course.value.name = '';
-      course.value.department = '';
-      course.value.number = '';
-      course.value.level = 1;
-      course.value.hours = 0;
-      showForm.value = false;
-    };
-
-    // Cancels the form (hides it without submitting)
-    const cancelForm = () => {
-      showForm.value = false;
-      // Optionally, you can reset fields here too
-    };
-
+  data() {
     return {
-      course,
-      showForm,
-      toggleForm,
-      submitCourse,
-      cancelForm
+      showForm: false,
+      course: {
+        name: '',
+        department: '',
+        number: '',
+        level: null,
+        hours: null,
+        description: ''
+      }
     };
+  },
+  methods: {
+    toggleForm() {
+      this.showForm = !this.showForm;
+    },
+    cancelForm() {
+      this.showForm = false;
+      this.resetCourse();
+    },
+    resetCourse() {
+      this.course = {
+        name: '',
+        department: '',
+        number: '',
+        level: null,
+        hours: null,
+        description: ''
+      };
+    },
+    submitCourse() {
+      const courseData = {
+        name: this.course.name,
+        department: this.course.department,
+        number: this.course.number,
+        level: this.course.level,
+        hours: this.course.hours,
+        description: this.course.description,
+      };
+
+      console.log('Course Submitted:', courseData); // For testing purposes
+
+      // Eventually, you can send the data to the backend using an API call
+      // Example (using Axios or fetch):
+      // axios.post('/api/courses', courseData)
+      //   .then(response => {
+      //     console.log('Course added:', response.data);
+      //   })
+      //   .catch(error => {
+      //     console.error('Error adding course:', error);
+      //   });
+
+      this.showForm = false; // Hide the form after submission
+      this.resetCourse(); // Reset the form fields
+    }
   }
 };
 </script>
@@ -127,7 +137,7 @@ label {
   display: inline-block;
 }
 
-button{
+button {
   margin-left: 10px;
 }
 </style>
