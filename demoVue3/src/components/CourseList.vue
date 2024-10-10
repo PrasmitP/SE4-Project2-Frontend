@@ -38,36 +38,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-thead {
-  background-color: #f4f4f4;
-}
-
-th,
-td {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-button {
-  margin-right: 0.5rem;
-}
-
-button:first-of-type {
-  background-color: #007bff;
-  color: white;
-}
-
-button:last-of-type {
-  background-color: #dc3545;
-  color: white;
-}
-</style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Add Course Button -->
-    <button v-if="!showForm" @click="toggleForm">Add Course</button>
+    <button id="AddButton" v-if="!showForm" @click="toggleForm">Add Course</button>
 
     <!-- Course Form (hidden initially) -->
     <div v-if="showForm" class="form-container">
@@ -91,64 +91,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 1000; 
-}
-
-.course-form {
-  background: white; 
-  padding: 2rem; 
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
-  width: 300px; 
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column; 
-  margin-bottom: 1rem; 
-}
-
-.form-group label {
-  margin-bottom: 0.5rem; 
-}
-
-input {
-  padding: 0.5rem; 
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-}
-
-.form-actions {
-  display: flex;
-  justify-content: space-between; 
-}
-
-button {
-  background-color:#007FFF;
-  padding: 0.75rem 1.5rem; 
-  border: none; 
-  border-radius: 4px; 
-  cursor: pointer;
-  font-size: 1rem; 
-  color: white; 
-}
-
-button[type="submit"] {
-  background-color: #148918; 
-}
-
-button[type="button"] {
-  background-color: #930e05; 
-}
-</style>

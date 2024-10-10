@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <h1>University Course Management</h1>
-
     <!-- Add Course Form -->
     <add-course @addCourse="addCourse" />
 
@@ -94,17 +93,3 @@ export default {
   }
 };
 </script>
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-}
-
-#app {
-  margin: 0 auto;
-}
-
-h1 {
-  text-align: center;
-}
-</style>
