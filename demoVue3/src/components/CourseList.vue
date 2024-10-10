@@ -15,9 +15,7 @@
         </tr>
       </thead>
       <tbody>
-
         <tr v-for="course in courses" :key="course.idcourse">
-
           <td>{{ course.name }}</td>
           <td>{{ course.department }}</td>
           <td>{{ course.courseNumber }}</td>
@@ -31,13 +29,6 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- Pagination controls -->
-    <div class="pagination-controls">
-      <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-    </div>
   </div>
 </template>
 
@@ -46,7 +37,6 @@ import CourseServices from "../services/CourseServices";
 import UpdateCourse from "../components/UpdateCourse.vue"
 
 export default {
-
   components: {
     UpdateCourse
   },
