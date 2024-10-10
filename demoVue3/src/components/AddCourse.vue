@@ -25,7 +25,7 @@
         </div>
         <div>
           <label for="description">Description: </label>
-          <textarea class="descInput" v-model="course.description" type="text" id="description" />
+          <textarea class="descInput" v-model="course.description" type="text" id="description" />changes
         </div>
         <div>
           <button type="submit">Confirm</button>
@@ -82,21 +82,37 @@ export default {
       };
       console.log(courseData);
       CourseServices.create(courseData)
-    .then((response) => {
-      console.log("add " + response.data);
-    })
-    .catch((e) => {
-      // message.value = e.response.data.message;
-      console.log(e);
-    });
+        .then((response) => {
+          console.log("add " + response.data);
+        })
+        .catch((e) => {
+          // message.value = e.response.data.message;
+          console.log(e);
+        });
       this.showForm = false;
-      this.resetCourse(); 
+      this.resetCourse();
     }
   }
 };
 </script>
 
 <style scoped>
+.modal {
+  width: 400px;
+  padding: 20px;
+  margin: 100px auto;
+  background: white;
+  border-radius: 10px;
+}
+
+.backdrop {
+  top: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+}
+
 form {
   display: flex;
   flex-direction: column;
