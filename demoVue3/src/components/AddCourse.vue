@@ -1,9 +1,7 @@
 <template>
-  <!-- AddCourse Button -->
   <button v-if="!showForm" @click="toggleForm">Add Course</button>
   <div v-if="showForm" class="overlay">
     <div class="model">
-      <!-- Course Form (hidden initially) -->
       <form v-if="showForm" @submit.prevent="submitCourse">
         <div>
           <label for="name">Course Name: </label>
@@ -15,7 +13,7 @@
         </div>
         <div>
           <label for="number">Course Number: </label>
-          <input class="textInput" v-model="course.number" type="text" id="number" required maxlength="4" />
+          <input class="textInput" v-model="course.courseNumber" type="text" id="number" required maxlength="4" />
         </div>
         <div>
           <label for="level">Course Level: </label>
@@ -39,6 +37,8 @@
 </template>
 
 <script>
+import CourseServices from "../services/CourseServices";
+
 export default {
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
       course: {
         name: '',
         department: '',
-        number: '',
+        courseNumber: '',
         level: null,
         hours: null,
         description: ''
@@ -65,7 +65,7 @@ export default {
       this.course = {
         name: '',
         department: '',
-        number: '',
+        courseNumber: '',
         level: null,
         hours: null,
         description: ''
@@ -75,26 +75,22 @@ export default {
       const courseData = {
         name: this.course.name,
         department: this.course.department,
-        number: this.course.number,
+        courseNumber: this.course.courseNumber,
         level: this.course.level,
         hours: this.course.hours,
         description: this.course.description,
       };
-
-      console.log('Course Submitted:', courseData); // For testing purposes
-
-      // Eventually, you can send the data to the backend using an API call
-      // Example (using Axios or fetch):
-      // axios.post('/api/courses', courseData)
-      //   .then(response => {
-      //     console.log('Course added:', response.data);
-      //   })
-      //   .catch(error => {
-      //     console.error('Error adding course:', error);
-      //   });
-
-      this.showForm = false; // Hide the form after submission
-      this.resetCourse(); // Reset the form fields
+      console.log(courseData);
+      CourseServices.create(courseData)
+    .then((response) => {
+      console.log("add " + response.data);
+    })
+    .catch((e) => {
+      // message.value = e.response.data.message;
+      console.log(e);
+    });
+      this.showForm = false;
+      this.resetCourse(); 
     }
   }
 };
