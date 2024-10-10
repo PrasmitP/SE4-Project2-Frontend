@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Course List</h2>
+    <update-course v-if="selectedCourse" :course="selectedCourse" @cancel="closeUpdate" />
     <table>
       <thead>
         <tr>
@@ -14,16 +15,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="course in courses" :key="course.id">
+        <tr v-for="course in courses" :key="course.idcourse">
           <td>{{ course.name }}</td>
           <td>{{ course.department }}</td>
-          <td>{{ course.number }}</td>
+          <td>{{ course.courseNumber }}</td>
           <td>{{ course.level }}</td>
           <td>{{ course.hours }}</td>
           <td>{{ course.description }}</td>
           <td>
-            <button @click="$emit('editCourse', course)">Edit</button>
-            <button @click="$emit('deleteCourse', course.id)">Delete</button>
+            <button @click="showUpdate(course)">Edit</button>
+            <button @click="deleteCourse(course.idcourse)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -32,42 +33,48 @@
 </template>
 
 <script>
+import CourseServices from "../services/CourseServices";
+import UpdateCourse from "../components/UpdateCourse.vue"
+
 export default {
-  props: {
-    courses: Array
+  components: {
+    UpdateCourse
+  },
+  data() {
+    return {
+      selectedCourse: null,
+      courses: []
+    };
+  },
+  methods: {
+    showUpdate(course) {
+      this.selectedCourse = course;
+    },
+    closeUpdate() {
+      this.selectedCourse = null;
+    },
+    deleteCourse(courseId) {
+      CourseServices.delete(courseId)
+        .then((response) => {
+          this.fetchCourses();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+    },
+    fetchCourses() {
+      CourseServices.getAll()
+        .then((response) => {
+          this.courses = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  },
+  mounted() {
+    this.fetchCourses();
   }
-}
+};
 </script>
-
-<style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-thead {
-  background-color: #f4f4f4;
-}
-
-th,
-td {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-button {
-  margin-right: 0.5rem;
-}
-
-button:first-of-type {
-  background-color: #007bff;
-  color: white;
-}
-
-button:last-of-type {
-  background-color: #dc3545;
-  color: white;
-}
-</style>
