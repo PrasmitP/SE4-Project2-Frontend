@@ -13,7 +13,7 @@
       </div>
       <div>
         <label for="number">Course Number: </label>
-        <input v-model="updatedCourse.number" type="text" id="number" required maxlength="4" />
+        <input v-model="updatedCourse.number" type="text" id="number" required maxlength="9" />
       </div>
       <div>
         <label for="level">Course Level: </label>
@@ -68,33 +68,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Popup container styling */
-.popup-container {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  width: 300px;
-  z-index: 1000;
-  border-radius: 8px;
-}
-
-/* Form styling */
-.popup-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.popup-form div {
-  margin-bottom: 1rem;
-}
-
-.popup-form button {
-  margin-right: 0.5rem;
-}
-</style>
