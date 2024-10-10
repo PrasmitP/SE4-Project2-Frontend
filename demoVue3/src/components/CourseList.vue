@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Course List</h2>
+    <update-course v-if="selectedCourse" :course="selectedCourse" @cancel="closeUpdate" />
     <table>
       <thead>
         <tr>
@@ -14,16 +15,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="course in paginatedCourses" :key="course.id">
+
+        <tr v-for="course in courses" :key="course.idcourse">
+
           <td>{{ course.name }}</td>
           <td>{{ course.department }}</td>
-          <td>{{ course.number }}</td>
+          <td>{{ course.courseNumber }}</td>
           <td>{{ course.level }}</td>
           <td>{{ course.hours }}</td>
           <td>{{ course.description }}</td>
           <td>
-            <button @click="$emit('editCourse', course)">Edit</button>
-            <button @click="$emit('deleteCourse', course.id)">Delete</button>
+            <button @click="showUpdate(course)">Edit</button>
+            <button @click="deleteCourse(course.idcourse)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -39,51 +42,49 @@
 </template>
 
 <script>
+import CourseServices from "../services/CourseServices";
+import UpdateCourse from "../components/UpdateCourse.vue"
+
 export default {
-  props: {
-    courses: Array
+
+  components: {
+    UpdateCourse
   },
   data() {
     return {
-      currentPage: 1,
-      coursesPerPage: 5 // Number of courses to display per page
+      selectedCourse: null,
+      courses: []
     };
   },
-  computed: {
-    totalPages() {
-      return Math.ceil(this.courses.length / this.coursesPerPage);
+  methods: {
+    showUpdate(course) {
+      this.selectedCourse = course;
     },
-    paginatedCourses() {
-      const start = (this.currentPage - 1) * this.coursesPerPage;
-      const end = start + this.coursesPerPage;
-      return this.courses.slice(start, end);
+    closeUpdate() {
+      this.selectedCourse = null;
+    },
+    deleteCourse(courseId) {
+      CourseServices.delete(courseId)
+        .then((response) => {
+          this.fetchCourses();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+    },
+    fetchCourses() {
+      CourseServices.getAll()
+        .then((response) => {
+          this.courses = response.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
   },
-  methods: {
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-      }
-    },
-    previousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-      }
-    }
+  mounted() {
+    this.fetchCourses();
   }
 };
 </script>
-
-<style>
-.pagination-controls {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-button[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-</style>

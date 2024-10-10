@@ -1,10 +1,8 @@
 import axios from "axios";
-// import Utils from "../config/utils.js"; I guess we dont need this
-import AuthServices from "./authServices.js";
 
 var baseurl = "";
 if (import.meta.env.DEV) {
-  baseurl = "http://localhost/course/";
+  baseurl = "http://localhost:3013/";
 } else {
   baseurl = "/course-t3/";
 }

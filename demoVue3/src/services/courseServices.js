@@ -2,27 +2,24 @@ import apiClient from "./services.js";
 
 export default {
   getAll() {
-    return apiClient.get("/tutorials");
-  },
-  getAllForUser(userId) {
-    return apiClient.get("/tutorials/userTut/" + userId);
+    return apiClient.get("/course");
   },
   get(id) {
-    return apiClient.get(`/tutorials/${id}`);
+    return apiClient.get(`/course/${id}`);
   },
   create(data) {
-    return apiClient.post("/", data);
+    return apiClient.post("/course", data);
   },
   update(id, data) {
-    return apiClient.put(`/tutorials/${id}`, data);
+    return apiClient.put(`/course/${id}`, data);
   },
   delete(id) {
-    return apiClient.delete(`/tutorials/${id}`);
+    return apiClient.delete(`/course/${id}`);
   },
   deleteAll() {
-    return apiClient.delete(`/tutorials`);
+    return apiClient.delete(`/course`);
   },
   findByTitle(title) {
-    return apiClient.get(`/tutorials?title=${title}`);
+    return apiClient.get(`/course?name=${title}`);
   },
 };
